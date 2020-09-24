@@ -1,10 +1,27 @@
 <?php
 
+//$repository = Dotenv\Repository\RepositoryBuilder::createWithNoAdapters()
+//    ->addAdapter(Dotenv\Repository\Adapter\EnvConstAdapter::class)
+//    ->addWriter(Dotenv\Repository\Adapter\PutenvAdapter::class)
+//    ->immutable()
+//    ->make();
+//
+//$dotenv = Dotenv\Dotenv::create($repository, __DIR__ .'\env');
+//$dotenv->load();
+
 class DB {
-    protected $db_hostname = 'localhost';
-    protected $db_username = 'root';
-    protected $db_password = 'admin';
-    protected $db_name = 'slim_app';
+    protected $db_hostname;
+    protected $db_username;
+    protected $db_password;
+    protected $db_name;
+
+    public function __construct()
+    {
+        $this->db_hostname = $_ENV['DB_HOSTNAME'];
+        $this->db_username = $_ENV['DB_USERNAME'];
+        $this->db_password = $_ENV['DB_PASSWORD'];
+        $this->db_name = $_ENV['DB_NAME'];
+    }
 
     public function DBConnect()
     {
