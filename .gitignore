@@ -1,0 +1,7 @@
+# phpstorm project files
+.idea
+.env
+# windows thumbnail cache
+Thumbs.db
+# composer vendor dir
+/vendor
