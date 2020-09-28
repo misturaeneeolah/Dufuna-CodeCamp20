@@ -10,8 +10,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '../../');
 $dotenv->load();
 
 require __DIR__ . '/../src/db.php';
-//require __DIR__ . '/../app/controllers/UserController.php';
-//require __DIR__ . '/../src/JsonBodyParserMiddleware.php';
+require __DIR__ . '/../app/controllers/UserController.php';
+require __DIR__ . '/../src/JsonBodyParserMiddleware.php';
 
 // Instantiate app
 $app = AppFactory::create();
