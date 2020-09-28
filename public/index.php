@@ -10,27 +10,25 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '../../');
 $dotenv->load();
 
 require __DIR__ . '/../src/db.php';
-require __DIR__ . '/../app/controllers/UserController.php';
-require __DIR__ . '/../src/JsonBodyParserMiddleware.php';
+//require __DIR__ . '/../app/controllers/UserController.php';
+//require __DIR__ . '/../src/JsonBodyParserMiddleware.php';
 
+// Instantiate app
 $app = AppFactory::create();
 
-$app->addBodyParsingMiddleware();
-$app->addRoutingMiddleware();
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
-
 require __DIR__ . '/../src/routes.php';
+
+// Add route callbacks
+$app->get('/', function (Request $request, Response $response) {
+    $response->getBody()->write('Slim Application');
+    return $response;
+});
 
 $products = [
     1 => ['id' => 1, "name" => "Cell phone", "price" => "$150"],
     2 => ['id' => 2, "name" => "car",  "price" => "$45,500"],
     3 => ['id' => 3, "name" => "Television",  "price" => "$1,500"]
 ];
-
-$app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write('Slim Application');
-    return $response;
-});
 
 $app->get('/products', function (Request $request, Response $response, $args) use ($products) {
     $payload = json_encode($products);
@@ -49,4 +47,10 @@ $app->get('/products/{id}', function (Request $request, Response $response, $arg
     return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
 });
 
+//$app->get('/products[/{id}]', function (Request $request, Response $response, $args) {
+//    // responds to both `/products` and `/products/123`
+//    // but not to `/products/`
+//});
+
+// Run application
 $app->run();
