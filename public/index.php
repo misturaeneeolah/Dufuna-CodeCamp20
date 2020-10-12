@@ -10,8 +10,8 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '../../');
 $dotenv->load();
 
 require __DIR__ . '/../src/db.php';
-require __DIR__ . '/../app/controllers/UserController.php';
 require __DIR__ . '/../src/JsonBodyParserMiddleware.php';
+require __DIR__ . '/../app/controllers/UserController.php';
 
 // Instantiate app
 $app = AppFactory::create();
@@ -46,11 +46,6 @@ $app->get('/products/{id}', function (Request $request, Response $response, $arg
     $response->getBody()->write(json_encode($product));
     return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
 });
-
-//$app->get('/products[/{id}]', function (Request $request, Response $response, $args) {
-//    // responds to both `/products` and `/products/123`
-//    // but not to `/products/`
-//});
 
 // Run application
 $app->run();
