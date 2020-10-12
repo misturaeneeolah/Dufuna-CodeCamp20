@@ -1,6 +1,11 @@
 # Dufuna-CodeCamp20
 This branch contains code snippet for PHP Slim project
 
+## Cloning
+```
+git clone https://github.com/Dufuna-CodeCamp/Dufuna-CodeCamp20.git
+```
+
 ## Requirements
 - PHP
 - Composer
